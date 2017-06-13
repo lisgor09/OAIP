@@ -1,0 +1,340 @@
+//---------------------------------------------------------------------------
+
+
+#pragma hdrstop
+
+#include "Tree.h"
+#include "Main.h"
+
+
+Tree::~Tree()
+{
+	Clear(TreeRoot);
+}
+
+Node *leftRotate(Node *n)
+{
+	if ( n->right != NULL )
+	{
+		Node *right  = n->right ;
+		n->right      = right->right;
+		right->right = right->left;
+		right->left  = n->left;
+		n->left      = right;
+
+		int tempKey  = n->key,
+			tempData = n->data;
+
+		n->key  = n->left->key;
+		n->data = n->left->data;
+		n->left->key  = tempKey;
+		n->left->data = tempData;
+	}
+	return n;
+}
+
+Node *rightRotate(Node *n)
+{
+	if ( n->left != NULL )
+	{
+		Node *left  = n->left ;
+		n->left      = left->left;
+		left->left = left->right;
+		left->right  = n->right;
+		n->right      = left;
+
+		int tempKey  = n->key,
+			tempData = n->data;
+
+		n->key  = n->right->key;
+		n->data = n->right->data;
+		n->right->key  = tempKey;
+		n->right->data = tempData;
+	}
+	return n;
+}
+
+Node *createRightVine(Node *TreeRoot)
+{
+	while ( TreeRoot->left != NULL )
+	{
+		TreeRoot = rightRotate(TreeRoot);
+	}
+	if ( TreeRoot->right != NULL )
+	{
+		TreeRoot->right = createRightVine(TreeRoot->right);
+	}
+	return TreeRoot;
+}
+
+int getNodeCount(Node *TreeRoot)
+{
+	if ( TreeRoot == NULL )
+	{
+		return 0;
+	}
+	int i = 1;
+	while ( TreeRoot->right != NULL )
+	{
+		TreeRoot = TreeRoot->right;
+		i++;
+	}
+	return i;
+}
+
+Node *balanceVine(Node *TreeRoot)
+{
+	int nodeCount = getNodeCount(TreeRoot),
+		times     = (int)(log(nodeCount) / log(2));
+	Node *newRoot = TreeRoot,
+		 *temp;
+	for (int i = 0; i < times; i++)
+	{
+		newRoot = leftRotate(newRoot);
+		TreeRoot    = newRoot->right;
+		temp = newRoot->right;
+		for (int j = 0; j < nodeCount / 2 - 1; j++)
+		{
+			TreeRoot = leftRotate(TreeRoot);
+			TreeRoot = TreeRoot->right;
+		}
+		nodeCount >>= 1;
+		newRoot->right = temp;
+	}
+	return newRoot;
+}
+void Tree::Balance()
+{
+
+	TreeRoot = balanceVine(createRightVine(TreeRoot));
+}
+
+void Tree::Clear(Node *temp)      //Метод Clear - для отчистки дерева
+{
+	if (temp == NULL)
+	{
+		return;
+	}
+	Clear(temp->left);
+	Clear(temp->right);
+	if (temp == TreeRoot)
+	{
+	  size = 0;
+	  TreeRoot = NULL;
+	}
+	delete temp;
+}
+
+Node *Tree::GetRoot()
+{
+	return TreeRoot;
+}
+
+void Tree::Insert(int X, int V)   // Метод Insert - для добавления узла в дерево
+{                                 // X - ключ добав. узла, V - данные добав. узла
+	Node *NewNode  = new Node,
+		 *temp     = TreeRoot,
+		 *PrevNode = NULL;
+	int  level     = 0;
+	char brunch    = 'n';
+	NewNode->key   = X;
+	NewNode->data  = V;
+	NewNode->left  = NULL;
+	NewNode->right = NULL;
+	while (1)
+	{
+		if ( temp == NULL )
+		{
+			size++;
+			temp = NewNode;
+			if ( level == 0 )
+			{
+				TreeRoot = temp;
+				return;
+			} else
+			{
+				if ( brunch == 'l' )
+				{
+					PrevNode->left  = temp;
+				}
+				if ( brunch == 'r' )
+				{
+					PrevNode->right = temp;
+				}
+				return;
+			}
+
+		}
+		if ( temp->key < X )
+		{
+			PrevNode = temp;
+			temp     = temp->right;
+			brunch   = 'r';
+ 			level++;
+			continue;
+		}
+		if ( temp->key > X )
+		{
+			PrevNode = temp;
+			brunch   = 'l';
+			temp     = temp->left;
+			level++;
+			continue;
+		}
+		if ( temp->key == X )
+		{
+			temp->data = V;
+			return;
+		}
+	}
+}
+
+void PrintNode(Node *root, TTreeNode *x, char brunch)
+{
+	if ( root == NULL)
+	{
+		return;
+	}
+	TTreeNode *temp;
+	if ( brunch == 'f' )
+	{
+		 temp = FMain->TreeView->Items->Add(NULL, IntToStr(root->key));
+	}
+	if ( brunch == 'l' )
+	{
+		 temp = FMain->TreeView->Items->AddChild(x, IntToStr(root->key));
+	}
+	if ( brunch == 'r' )
+	{
+		 temp = FMain->TreeView->Items->AddChildFirst(x, IntToStr(root->key));
+	}
+	PrintNode(root->left,  temp , 'l');
+	PrintNode(root->right, temp , 'r');
+}
+
+void Tree::PrintIntoTreeView()
+{
+	FMain->TreeView->Items->Clear();
+	PrintNode(TreeRoot, NULL, 'f');
+
+}
+
+void Tree::Delete(int X)  //Метод Delete - для удаления узлов из дерева
+{                         //X - ключ удаляймого узла
+	if ( TreeRoot == NULL ) return;
+	if ( TreeRoot->key == X )
+	{
+		Clear(TreeRoot);
+		return;
+	}
+	Node *temp     = TreeRoot,
+		 *PrevNode = NULL,
+		 *CurNode  = NULL,
+		 *LeftMost = NULL;
+	char brunch = 'n';
+	while ( temp != NULL )
+	{
+		if ( temp->key < X )
+		{
+			PrevNode = temp;
+			temp = temp->right;
+			brunch = 'r';
+			continue;
+		}
+		if ( temp->key > X )
+		{
+			PrevNode = temp;
+			temp = temp->left;
+			brunch = 'l';
+			continue;
+		}
+		if ( temp->key == X)
+		{
+			if ( temp->left  == NULL
+			&&   temp->right == NULL)
+			{
+				PrevNode->left  = NULL;
+				PrevNode->right = NULL;
+				delete temp;
+				return;
+			} else
+			if ( temp->left  != NULL
+			&&   temp->right != NULL)
+			{
+				if ( temp->right->left == NULL )
+				{
+					temp->right->left = temp->left;
+					if ( brunch == 'l' )
+					{
+						PrevNode->left = temp->right;
+					}
+					if ( brunch == 'r' )
+					{
+						PrevNode->right = temp->right;
+					}
+					delete temp;
+					return;
+				}  else
+				{
+					CurNode = temp;
+					temp = temp->right;
+					while (temp != NULL)
+					{
+						LeftMost = temp;
+						temp = temp->left;
+					}
+					int Key = LeftMost->key;
+					CurNode->data    = LeftMost->data;
+					Delete(Key);
+					CurNode->key     = Key ;
+
+					return;
+				}
+			} else
+			{
+				if ( temp->left  != NULL )
+				{
+					if (brunch == 'l')
+					{
+						PrevNode->left  = temp->left;
+					}
+					if (brunch == 'r')
+					{
+						PrevNode->right = temp->left;
+					}
+					delete temp;
+					return;
+				}
+				if ( temp->right != NULL )
+				{
+					if (brunch == 'l')
+					{
+						PrevNode->left  = temp->right;
+					}
+					if (brunch == 'r')
+					{
+						PrevNode->right = temp->right;
+					}
+
+					delete temp;
+					return;
+				}
+			}
+
+		}
+	}
+}
+
+void Tree::Print()
+{
+	LeftOrder(TreeRoot);
+}
+
+void Tree::LeftOrder(Node *temp)
+{
+	if (temp->left) LeftOrder(temp->left);
+	printf("%d ", temp->data);
+	if (temp->right) LeftOrder(temp->right);
+}
+
+#pragma package(smart_init)

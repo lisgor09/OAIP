@@ -1,0 +1,61 @@
+//---------------------------------------------------------------------------
+
+#ifndef TreeH
+#define TreeH
+
+#pragma hdrstop
+#pragma argsused
+
+#include <tchar.h>
+#include <tchar.h>
+#include <conio.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <windows.h>
+#include <iostream>
+#include <locale.h>
+#include <iomanip>
+#include <ComCtrls.hpp>
+using namespace std;
+
+struct Data
+{
+	String data;
+	TTreeNode *index;
+};
+
+struct Node
+{
+	int key;
+	Data x;                 //x - данные, находящиеся в узле
+	Node *left, *right;
+};
+
+class Tree
+{
+protected:
+	Node *TreeRoot;
+	int size;
+public:
+	Tree() {TreeRoot = NULL; size = 0;};
+	~Tree();
+	void Clear(Node*);
+	//Node leftRotate(Node*);
+	//Node rightRotate(Node *);
+	//Node createRightVine(Node *);
+	//int getNodeCount(Node *);
+	//Node balanceVine(Node *);
+	Node *GetRoot();
+	void Insert(int, String);
+	void Balance();
+	void Delete(int);
+	void PrintIntoTreeView();
+	void Clear();
+	void PrintInPreOrder(Node*);
+	void PrintInPostOrder(Node*);
+	void PrintAscending(Node*);
+	Data Find(int);
+};
+
+#endif

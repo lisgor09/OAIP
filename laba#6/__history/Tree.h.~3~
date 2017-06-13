@@ -1,0 +1,48 @@
+//---------------------------------------------------------------------------
+
+#ifndef TreeH
+#define TreeH
+
+#pragma hdrstop
+#pragma argsused
+
+#include <tchar.h>
+#include <tchar.h>
+#include <conio.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <windows.h>
+#include <iostream>
+#include <locale.h>
+#include <iomanip>
+#include <ComCtrls.hpp>
+using namespace std;
+
+
+struct Node
+{
+	int key, data, balance;
+	TTreeNode *index;
+	Node *left, *right;
+};
+
+class Tree
+{
+private:
+	Node *Root;
+	int size;
+public:
+	Tree() {Root = NULL; size = 0;};
+	~Tree();
+	void Clear(Node*);
+	Node *GetRoot();
+	void Insert(int,int);
+	void Delete(int);
+	void LeftOrder(Node*);
+	void Print();
+	void Clear();
+};
+
+Tree tree;
+#endif

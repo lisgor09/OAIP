@@ -1,0 +1,90 @@
+//---------------------------------------------------------------------------
+
+#include <vcl.h>
+#pragma hdrstop
+
+#include "Main.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.dfm"
+TFMain *FMain;
+//---------------------------------------------------------------------------
+__fastcall TFMain::TFMain(TComponent* Owner)
+	: TForm(Owner)
+{
+}
+//---------------------------------------------------------------------------
+void __fastcall TFMain::Button1Click(TObject *Sender)
+{
+	tree.Insert(StrToInt(Edit1->Text),0);
+}
+//---------------------------------------------------------------------------
+
+
+
+void __fastcall TFMain::DeleteClick(TObject *Sender)
+{
+	tree.Delete(StrToInt(Edit2->Text));
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFMain::FormCreate(TObject *Sender)
+{
+	StringGrid->Cells[0][0] = "Ключ";
+	StringGrid->Cells[1][0] = "Значение";
+	StringGrid->Cells[0][1] = "8";
+	StringGrid->Cells[1][1] = "0";
+	StringGrid->Cells[0][2] = "3";
+	StringGrid->Cells[1][2] = "0";
+	StringGrid->Cells[0][3] = "10";
+	StringGrid->Cells[1][3] = "0";
+	StringGrid->Cells[0][4] = "1";
+	StringGrid->Cells[1][4] = "0";
+	StringGrid->Cells[0][5] = "6";
+	StringGrid->Cells[1][5] = "0";
+	StringGrid->Cells[0][6] = "14";
+	StringGrid->Cells[1][6] = "0";
+	StringGrid->Cells[0][7] = "4";
+	StringGrid->Cells[1][7] = "0";
+	StringGrid->Cells[0][8] = "7";
+	StringGrid->Cells[1][8] = "0";
+	StringGrid->Cells[0][9] = "13";
+	StringGrid->Cells[1][9] = "0";
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFMain::AddFromSGClick(TObject *Sender)
+{
+	int i = 1;
+	while ( StringGrid->Cells[0][i] != "" )
+	{
+		tree.Insert( StrToInt(StringGrid->Cells[0][i]),
+					 StrToInt(StringGrid->Cells[1][i]) );
+		i++;
+	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFMain::TreeViewAdvancedCustomDrawItem(TCustomTreeView *Sender, TTreeNode *Node,
+          TCustomDrawState State, TCustomDrawStage Stage, bool &PaintImages,
+          bool &DefaultDraw)
+{
+	Node->Expanded = true;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFMain::ClearTreeClick(TObject *Sender)
+{
+	TreeView->Items->Clear();
+	tree.Clear(tree.GetRoot());
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFMain::Button2Click(TObject *Sender)
+{
+	//TreeView->Select(TreeView->Items->Item[3]);
+	//TTreeNode *temp
+	//TreeView->Items->Item[5]->MoveTo(TreeView->Items->Item[0],naAddChild);
+}
+//---------------------------------------------------------------------------
+

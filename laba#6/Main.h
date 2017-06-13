@@ -1,0 +1,81 @@
+//---------------------------------------------------------------------------
+
+#ifndef MainH
+#define MainH
+//---------------------------------------------------------------------------
+#include <Classes.hpp>
+#include <Controls.hpp>
+#include <StdCtrls.hpp>
+#include <Forms.hpp>
+#include "Solution.h"
+#include <ComCtrls.hpp>
+#include <Grids.hpp>
+//---------------------------------------------------------------------------
+class TFMain : public TForm
+{
+__published:	// IDE-managed Components
+	TEdit *KeyToAdd;
+	TButton *Add;
+	TTreeView *TreeView;
+	TEdit *KeyToDelete;
+	TButton *Delete;
+	TStringGrid *StringGrid;
+	TButton *AddFromSG;
+	TButton *ClearTree;
+	TButton *Balance;
+	TEdit *DataToAdd;
+	TEdit *KeyToFind;
+	TButton *Find;
+	TMemo *Memo;
+	TButton *Postorder;
+	TButton *Ascending;
+	TButton *Preorder;
+	TButton *Solve;
+	TLabel *Key;
+	TLabel *Information;
+	TLabel *Label1;
+	TLabel *Label2;
+	TButton *Exit;
+	void __fastcall AddClick(TObject *Sender);
+	void __fastcall DeleteClick(TObject *Sender);
+	void __fastcall FormCreate(TObject *Sender);
+	void __fastcall AddFromSGClick(TObject *Sender);
+	void __fastcall ClearTreeClick(TObject *Sender);
+	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
+	void __fastcall StringGridSelectCell(TObject *Sender, int ACol, int ARow, bool &CanSelect);
+	void __fastcall StringGridExit(TObject *Sender);
+	void __fastcall StringGridGetEditText(TObject *Sender, int ACol, int ARow, UnicodeString &Value);
+	void __fastcall BalanceClick(TObject *Sender);
+	void __fastcall TreeViewHint(TObject *Sender, const TTreeNode *Node, UnicodeString &Hint);
+	void __fastcall FindClick(TObject *Sender);
+	void __fastcall TreeViewCustomDrawItem(TCustomTreeView *Sender, TTreeNode *Node,
+          TCustomDrawState State, bool &DefaultDraw);
+	void __fastcall PreorderClick(TObject *Sender);
+	void __fastcall PostorderClick(TObject *Sender);
+	void __fastcall AscendingClick(TObject *Sender);
+	void __fastcall SolveClick(TObject *Sender);
+	void __fastcall KeyToAddKeyPress(TObject *Sender, wchar_t &Key);
+	void __fastcall KeyToDeleteKeyPress(TObject *Sender, wchar_t &Key);
+	void __fastcall KeyToFindKeyPress(TObject *Sender, wchar_t &Key);
+	void __fastcall StringGridKeyPress(TObject *Sender, wchar_t &Key);
+	void __fastcall ExitClick(TObject *Sender);
+
+
+
+
+
+
+
+
+
+
+
+
+private:	// User declarations
+public:		// User declarations
+	__fastcall TFMain(TComponent* Owner);
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TFMain *FMain;
+//---------------------------------------------------------------------------
+#endif

@@ -1,0 +1,21 @@
+//---------------------------------------------------------------------------
+
+#ifndef TreeH
+#define TreeH
+
+struct Node
+{
+	int key, data, balance;
+	Node *left, *right;
+};
+
+class Tree
+{
+private:
+	Node *Root;
+public:
+	Tree() {Root = NULL;}
+	void Insert(int,int);
+};
+
+#endif

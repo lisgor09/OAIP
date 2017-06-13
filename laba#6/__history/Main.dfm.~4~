@@ -1,0 +1,98 @@
+object FMain: TFMain
+  Left = 0
+  Top = 0
+  Caption = 'Tree'
+  ClientHeight = 519
+  ClientWidth = 622
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnClose = FormClose
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Edit1: TEdit
+    Left = 24
+    Top = 32
+    Width = 89
+    Height = 21
+    TabOrder = 0
+  end
+  object Button1: TButton
+    Left = 128
+    Top = 30
+    Width = 75
+    Height = 25
+    Caption = 'Add'
+    TabOrder = 1
+    OnClick = Button1Click
+  end
+  object TreeView: TTreeView
+    Left = 24
+    Top = 104
+    Width = 249
+    Height = 305
+    Indent = 19
+    ReadOnly = True
+    ShowButtons = False
+    TabOrder = 2
+    OnAdvancedCustomDrawItem = TreeViewAdvancedCustomDrawItem
+  end
+  object Edit2: TEdit
+    Left = 24
+    Top = 70
+    Width = 89
+    Height = 21
+    TabOrder = 3
+  end
+  object Delete: TButton
+    Left = 128
+    Top = 68
+    Width = 75
+    Height = 25
+    Caption = 'Delete'
+    TabOrder = 4
+    OnClick = DeleteClick
+  end
+  object StringGrid: TStringGrid
+    Left = 288
+    Top = 30
+    Width = 133
+    Height = 379
+    ColCount = 2
+    FixedCols = 0
+    RowCount = 2
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing]
+    ScrollBars = ssVertical
+    TabOrder = 5
+    OnExit = StringGridExit
+    OnGetEditText = StringGridGetEditText
+    OnKeyPress = StringGridKeyPress
+    OnSelectCell = StringGridSelectCell
+    RowHeights = (
+      24
+      24)
+  end
+  object AddFromSG: TButton
+    Left = 464
+    Top = 30
+    Width = 75
+    Height = 25
+    Caption = 'Add from SG'
+    TabOrder = 6
+    OnClick = AddFromSGClick
+  end
+  object ClearTree: TButton
+    Left = 464
+    Top = 68
+    Width = 75
+    Height = 25
+    Caption = 'Clear'
+    TabOrder = 7
+    OnClick = ClearTreeClick
+  end
+end

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.609,=E:\LABI 2 sem\OAIP\laba#6\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.629,E:\LABI 2 sem\OAIP\laba#6\Unit1.cpp=E:\LABI 2 sem\OAIP\laba#6\Solution.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.296,=E:\LABI 2 sem\OAIP\laba#6\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.903,E:\LABI 2 sem\OAIP\laba#6\Main.cpp=C:\Users\Станислав\Documents\RAD Studio\Projects\Main.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.903,E:\LABI 2 sem\OAIP\laba#6\Main.dfm=C:\Users\Станислав\Documents\RAD Studio\Projects\Main.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.946,C:\Users\Станислав\Documents\RAD Studio\Projects\Main.cpp=C:\Users\Станислав\Documents\RAD Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.700,E:\LABI 2 sem\OAIP\laba#6\Tree.h=C:\Users\Станислав\Documents\RAD Studio\Projects\Tree.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.946,C:\Users\Станислав\Documents\RAD Studio\Projects\Main.h=C:\Users\Станислав\Documents\RAD Studio\Projects\Unit1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.717,E:\LABI 2 sem\OAIP\laba#6\Unit1.cpp=E:\LABI 2 sem\OAIP\laba#6\Grid.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.047,=E:\LABI 2 sem\OAIP\laba#6\File1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.903,E:\LABI 2 sem\OAIP\laba#6\Main.h=C:\Users\Станислав\Documents\RAD Studio\Projects\Main.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.700,E:\LABI 2 sem\OAIP\laba#6\Tree.cpp=C:\Users\Станислав\Documents\RAD Studio\Projects\Tree.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.629,E:\LABI 2 sem\OAIP\laba#6\Unit1.h=E:\LABI 2 sem\OAIP\laba#6\Solution.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.946,C:\Users\Станислав\Documents\RAD Studio\Projects\Main.dfm=C:\Users\Станислав\Documents\RAD Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.322,=C:\Users\Станислав\Documents\RAD Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.602,=C:\Users\Станислав\Documents\RAD Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.725,C:\Users\Станислав\Documents\RAD Studio\Projects\Tree.h=C:\Users\Станислав\Documents\RAD Studio\Projects\Unit1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.725,C:\Users\Станислав\Documents\RAD Studio\Projects\Tree.cpp=C:\Users\Станислав\Documents\RAD Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.910,E:\LABI 2 sem\OAIP\laba#6\task#1.cbproj=C:\Users\Станислав\Documents\RAD Studio\Projects\Project4.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.717,E:\LABI 2 sem\OAIP\laba#6\Unit1.h=E:\LABI 2 sem\OAIP\laba#6\Grid.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.583,=C:\Users\Станислав\Documents\RAD Studio\Projects\Project4.res</Transaction>
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="Main.cpp"/>
+    <File Path="Main.cpp"/>
+    <File Path="Main.dfm"/>
+    <File Path="Main.h"/>
+    <File Path="Solution.cpp"/>
+    <File Path="Solution.cpp"/>
+    <File Path="Solution.h"/>
+    <File Path="Tree.cpp"/>
+    <File Path="Tree.cpp"/>
+    <File Path="Tree.h"/>
+    <File Path="task#1.cpp"/>
+    <File Path="task#1.res"/>
+  </ProjectSortOrder>
+</BorlandProject>

@@ -1,0 +1,225 @@
+//---------------------------------------------------------------------------
+
+
+#pragma hdrstop
+
+#include "Tree.h"
+#include "Main.h"
+
+Tree::~Tree()
+{
+	Clear(Root);
+}
+
+void Tree::Clear(Node *temp)
+{
+	if (temp == NULL) return;
+	Clear(temp->left);
+	Clear(temp->right);
+	if (temp == Root)
+	{
+	  size = 0;
+	  Root = NULL;
+	}
+	delete temp;
+}
+Node *Tree::GetRoot()
+{
+	return Root;
+}
+void Tree::Insert(int X, int V)
+{
+	Node *NewNode  = new Node,
+		 *temp     = Root,
+		 *PrevNode = NULL;
+	NewNode->key   = X;
+	NewNode->data  = V;
+	NewNode->left  = NULL;
+	NewNode->right = NULL;
+	int level = 0;
+	char brunch = 'n';
+	while (1)
+	{
+		if ( temp == NULL )
+		{
+			size++;
+			temp = NewNode;
+			if (level == 0)
+			{
+				temp->index = FMain->TreeView->Items->Add( NULL, IntToStr(X) );
+				Root = temp;
+				return;
+			} else
+			{
+				if (brunch == 'l')
+				{
+					temp->index = FMain->TreeView->Items->AddChild( PrevNode->index , IntToStr(X) );
+					PrevNode->left  = temp;
+				}
+				if (brunch == 'r')
+				{
+					temp->index = FMain->TreeView->Items->AddChildFirst( PrevNode->index , IntToStr(X) );
+					PrevNode->right = temp;
+				}
+				return;
+			}
+
+		}
+		if ( temp->key < X )
+		{
+			PrevNode = temp;
+			temp = temp->right;
+			brunch = 'r';
+ 			level++;
+			continue;
+		}
+		if ( temp->key > X )
+		{
+			PrevNode = temp;
+			brunch = 'l';
+			temp = temp->left;
+			level++;
+			continue;
+		}
+		if ( temp->key == X )
+		{
+			temp->data = V;
+			return;
+		}
+	}
+}
+
+void Tree::Delete(int X)
+{
+	if ( Root == NULL ) return;
+	if ( Root->key == X )
+	{
+		Clear(Root);
+		FMain->TreeView->Items->Clear();
+		return;
+	}
+	Node *temp     = Root,
+		 *PrevNode = NULL,
+		 *CurNode  = NULL,
+		 *LeftMost = NULL;
+	char brunch = 'n';
+	while ( temp != NULL )
+	{
+		if ( temp->key < X )
+		{
+			PrevNode = temp;
+			temp = temp->right;
+			brunch = 'r';
+			continue;
+		}
+		if ( temp->key > X )
+		{
+			PrevNode = temp;
+			temp = temp->left;
+			brunch = 'l';
+			continue;
+		}
+		if ( temp->key == X)
+		{
+			if ( temp->left  == NULL
+			&&   temp->right == NULL)
+			{
+				PrevNode->left  = NULL;
+				PrevNode->right = NULL;
+				FMain->TreeView->Items->Delete( temp->index );
+				delete temp;
+				return;
+			} else
+			if ( temp->left  != NULL
+			&&   temp->right != NULL)
+			{
+				if ( temp->right->left == NULL )
+				{
+					temp->right->left = temp->left;
+					temp->left->index->MoveTo( temp->right->index, naAddChild);
+					if ( brunch == 'l' )
+					{
+						temp->right->index->MoveTo( PrevNode->index, naAddChild );
+						PrevNode->left = temp->right;
+					}
+					if ( brunch == 'r' )
+					{
+						temp->right->index->MoveTo( PrevNode->index, naAddChildFirst );
+						PrevNode->right = temp->right;
+					}
+					FMain->TreeView->Items->Delete( temp->index );
+					delete temp;
+					return;
+				}  else
+				{
+					CurNode = temp;
+					temp = temp->right;
+					while (temp != NULL)
+					{
+						LeftMost = temp;
+						temp = temp->left;
+					}
+					int Key = LeftMost->key;
+					CurNode->data    = LeftMost->data;
+					CurNode->balance = LeftMost->balance;
+					CurNode->index->Text = LeftMost->index->Text;
+                    Delete(Key);
+					CurNode->key     = Key ;
+					//FMain->TreeView->Items->Delete( PrevNode->index );
+
+					return;
+				}
+			} else
+			{
+				if ( temp->left  != NULL )
+				{
+					if (brunch == 'l')
+					{
+						temp->left->index->MoveTo( PrevNode->index ,naAddChild );
+						PrevNode->left  = temp->left;
+					}
+					if (brunch == 'r')
+					{
+						temp->left->index->MoveTo( PrevNode->index ,naAddChildFirst );
+						PrevNode->right = temp->left;
+					}
+					FMain->TreeView->Items->Delete( temp->index );
+					delete temp;
+					return;
+				}
+				if ( temp->right != NULL )
+				{
+					if (brunch == 'l')
+					{
+						temp->right->index->MoveTo( PrevNode->index ,naAddChild );
+						PrevNode->left  = temp->right;
+					}
+					if (brunch == 'r')
+					{
+						temp->right->index->MoveTo( PrevNode->index ,naAddChildFirst );
+						PrevNode->right = temp->right;
+					}
+
+					FMain->TreeView->Items->Delete( temp->index );
+					delete temp;
+					return;
+				}
+			}
+
+		}
+	}
+}
+
+void Tree::Print()
+{
+	LeftOrder(Root);
+}
+
+void Tree::LeftOrder(Node *temp)
+{
+	if (temp->left) LeftOrder(temp->left);
+	printf("%d ", temp->data);
+	if (temp->right) LeftOrder(temp->right);
+}
+
+#pragma package(smart_init)

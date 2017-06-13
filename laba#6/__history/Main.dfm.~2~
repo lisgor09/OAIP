@@ -1,0 +1,63 @@
+object FMain: TFMain
+  Left = 0
+  Top = 0
+  Caption = 'Tree'
+  ClientHeight = 519
+  ClientWidth = 606
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 211
+    Top = 104
+    Width = 45
+    Height = 13
+  end
+  object Edit1: TEdit
+    Left = 24
+    Top = 32
+    Width = 89
+    Height = 21
+    TabOrder = 0
+  end
+  object Button1: TButton
+    Left = 128
+    Top = 30
+    Width = 75
+    Height = 25
+    Caption = 'Add'
+    TabOrder = 1
+    OnClick = Button1Click
+  end
+  object TreeView: TTreeView
+    Left = 24
+    Top = 104
+    Width = 249
+    Height = 249
+    Indent = 19
+    ReadOnly = True
+    TabOrder = 2
+  end
+  object Edit2: TEdit
+    Left = 24
+    Top = 70
+    Width = 89
+    Height = 21
+    TabOrder = 3
+  end
+  object Delete: TButton
+    Left = 128
+    Top = 68
+    Width = 75
+    Height = 25
+    Caption = 'Delete'
+    TabOrder = 4
+    OnClick = DeleteClick
+  end
+end
